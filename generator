@@ -7,8 +7,8 @@ unless ARGV.count == 1
 end
 
 def prompt(*args)
-    STDERR.print(*args)
-    STDIN.gets.chomp
+  STDERR.print(*args)
+  STDIN.gets.chomp
 end
 
 config = JSON.parse(File.read(ARGV[0]))
