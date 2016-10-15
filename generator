@@ -2,7 +2,7 @@
 require 'json'
 
 unless ARGV.count == 1
-  puts "Usage: #{__FILE__} <path-to-config>"
+  puts "Usage: #{__FILE__} <path-to-config> > <output_file>"
   exit 127
 end
 
