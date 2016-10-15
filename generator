@@ -1,0 +1,89 @@
+#!/usr/bin/env ruby
+require 'json'
+
+unless ARGV.count == 1
+  puts "Usage: #{__FILE__} <path-to-config>"
+  exit 127
+end
+
+def prompt(*args)
+    STDERR.print(*args)
+    STDIN.gets.chomp
+end
+
+config = JSON.parse(File.read(ARGV[0]))
+
+month = prompt('Enter month [1-12]: ').to_i
+raise "Invalid month: #{month}" unless (1..12).include? month
+
+year = prompt('Enter year [2011-]: ').to_i
+raise "Invalid year: #{year}" unless year >= 2011
+
+
+work_days = prompt("Enter number of work days for #{month}/#{year} [0-31]: ").to_i
+raise "Invalid number of work days: #{work_days}" unless (0..31).include? work_days
+
+
+insurance_income = prompt("Enter insurance income for #{month}/#{year} [e.g. 420]: ").to_f
+raise "Invalid insurance income: #{insurance_income}" unless insurance_income > 0
+
+
+puts [
+  month,
+  year,
+  "\"#{config['entity_number']}\"",
+  "\"#{config['egn']}\"",
+  config['egn_code'],
+  "\"#{config['family_name']}\"",
+  "\"#{config['first_and_middle_initials']}\"",
+  config['insured_entity_type_code'],
+  '00',
+  '00',
+  '00',
+  '00',
+  '00',
+  '00',
+  '00',
+  '00',
+  '00',
+  '00',
+  "\"0#{work_days}00\"",
+  work_days,
+  '00',
+  '00',
+  '00',
+  '00',
+  '000',
+  '000',
+  '0',
+  '""',
+  '0',
+  '00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  sprintf('%.2f', insurance_income),
+  '0.00',
+  '12.80',
+  '0.00',
+  '8.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '5.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '0.00',
+  '0',
+  '0',
+  '"NRAD12008"'
+].join(',')
