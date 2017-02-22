@@ -41,7 +41,7 @@ work_days = prompt("Enter number of work days for #{month}/#{year} [0-31]: ").to
 raise "Invalid number of work days: #{work_days}" unless (0..31).include? work_days
 
 
-insurance_income = prompt("Enter insurance income for #{month}/#{year} [e.g. 420]: ").to_f
+insurance_income = prompt("Enter insurance income for #{month}/#{year} [e.g. 460]: ").to_f
 raise "Invalid insurance income: #{insurance_income}" unless insurance_income > 0
 
 
@@ -83,7 +83,7 @@ puts [
   '0.00',
   sprintf('%.2f', insurance_income),
   '0.00',
-  '12.80',
+  '13.80',
   '0.00',
   '8.00',
   '0.00',
